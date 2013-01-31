@@ -9,6 +9,7 @@ group :development do
   gem "taps", ">= 0.3.23"
   gem "fpm"
   gem "rubyzip"
+  gem "mixlib-cli"
 end
 
 group :test do

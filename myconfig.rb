@@ -16,3 +16,5 @@ c = MyCLI.new
 # ARGV = [ '-l', 'debug' ]
 c.run
 MyConfig[:log_level] # :debug
+
+

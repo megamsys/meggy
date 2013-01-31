@@ -3,7 +3,7 @@ require "nm/version"
 
 Gem::Specification.new do |gem|
   gem.name = "nilam"
-  gem.version = Heroku::VERSION
+  gem.version = Nm::VERSION
 
   gem.author = "Thomas"
   gem.email = "support@megam.co"
