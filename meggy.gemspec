@@ -1,9 +1,9 @@
 $:.unshift File.expand_path("../lib", __FILE__)
-require "nm/version"
+require "meggy/version"
 
 Gem::Specification.new do |gem|
-  gem.name = "nilam"
-  gem.version = Nm::VERSION
+  gem.name = "meggy"
+  gem.version = Meggy::VERSION
 
   gem.author = "Thomas"
   gem.email = "support@megam.co"
@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.executables = "nm"
   gem.license = "Apache V2"
   gem.post_install_message = <<-MESSAGE
-! The `nm` gem has been deprecated and replaced with the Heroku Toolbelt.
+! The `meggy` gem has been deprecated and replaced with the Heroku Toolbelt.
 ! Download and install from: https://megam.co/download
 MESSAGE
 
