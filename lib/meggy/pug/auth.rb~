@@ -24,7 +24,6 @@ class  Auth #< Meggy::Pug
 	#login.parse_options
 	username = ask("Enter your username:  ") { |q| q.echo = true }
 	password = ask("Enter your password:  ") { |q| q.echo = "*" }
-	puts "Hi #{username} welcome"
 =begin
 	puts "Action : #{args[0]}"
 	puts "User Name : #{args[2]}"

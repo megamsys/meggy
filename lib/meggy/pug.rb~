@@ -185,16 +185,24 @@ class Meggy
 
     def self.subcommand_class_from(args)
       command_words = args.select {|arg| arg =~ /^(([[:alnum:]])[[:alnum:]\_\-]+)$/ }
+puts "Command words : "
+puts command_words
       subcommand_class = nil
       while ( !subcommand_class ) && ( !command_words.empty? )
         snake_case_class_name = command_words.join("_")
+puts "snake case"
+puts snake_case_class_name
         unless subcommand_class = subcommands[snake_case_class_name]
         command_words.pop
         end
       end
+puts "Sub commands : "
+puts subcommands
       # see if we got the command as e.g., knife node-list
       subcommand_class ||= subcommands[args.first.gsub('-', '_')]
-      subcommand_class || subcommand_not_found!(args)
+	puts "SUB command class : "
+	puts subcommand_class
+      ##subcommand_class || subcommand_not_found!(args)
     end
 
     def self.deps(&block)

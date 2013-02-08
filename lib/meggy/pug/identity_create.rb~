@@ -1,10 +1,12 @@
-
-require 'rubygems'
+require 'meggy/pug'
+require 'yaml'
 require 'mixlib/cli'
+#class Meggy
+ #class Pug
+  class IdentityCreate #< Pug
 
-class IdentityCreate
+    include Mixlib::CLI
 
-  include Mixlib::CLI
 banner "Usage: ruby mycli.rb sub-command (options)"
 
   option :help,
@@ -19,16 +21,18 @@ banner "Usage: ruby mycli.rb sub-command (options)"
     :long => "--identity_name IDENTITY_NAME",
     :description => "User's Identity Name(Account_name)"
 
-    def run
+    def run(args)
 	id_create = IdentityCreate.new
 	id_create.parse_options
-	#puts id_create.to_yaml
-	puts "Identity Create"
-	puts @name_args
+	puts "Action : #{args[0]}"
+	puts "Identity Name : #{args[2]}"
+	puts "Identity Created with name #{args[2]}"
     end
 
-end
+  end
+# end
 #end
+
 
 
 
