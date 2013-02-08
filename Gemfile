@@ -1,24 +1,10 @@
-source "http://rubygems.org"
+source :rubygems
 
 gemspec
 
-group :development do
-  gem "aws-s3"
-  gem "rake", ">= 0.8.7"
-  gem "rr", "~> 1.0.2"
-  gem "taps", ">= 0.3.23"
-  gem "fpm"
-  gem "rubyzip"
-  gem "mixlib-cli"
-end
+gem "ronn"
 
-group :test do
-  gem "fakefs"
-  gem "jruby-openssl", :platform => :jruby
-  gem "json"
-  gem "rake", ">= 0.8.7"
-  gem "rr", "~> 1.0.2"
-  gem "rspec", ">= 2.0"
-  gem "taps", ">= 0.3.23"
-  gem "webmock"
+group(:development, :test) do
+  gem 'rack', "~> 1.5.1"
+
 end
