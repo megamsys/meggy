@@ -1,0 +1,63 @@
+require 'rubygems'
+require 'mixlib/cli'
+#require 'asciimo'
+require './command'
+module Nm
+class MyCLI
+  include Mixlib::CLI
+#Asciimo.text("Star_Wars.flf", "Nilam-Megam", "yellow")
+
+banner "ruby mycli.rb [option]"
+
+  option :config_file, 
+    :short => "-c CONFIG",
+    :long  => "--config CONFIG",
+    :default => 'conf.rb',
+    :description => "The configuration file to use"
+
+com = Command.new
+
+option :help,
+    :short => "-h",
+    :long => "--help",
+    :description => "Show this message",
+    :on => :tail,
+    :boolean => true,
+    :show_options => true,
+    :exit => 0
+
+
+option :login, 
+    :long => "--login",
+    :description => "Login details",
+	:required => true,
+    #:default => 'log.rb',
+	:proc => com.select
+
+  option :identity_create, 
+    :long  => "--create_identity ACCOUNT_NAME",
+    :description => "Create Identity",
+	:proc => com.select
+
+  option :identity_list, 
+    :long  => "--list_identity USERNAME",
+    :description => "List Identity"
+
+  option :identity_delete, 
+    :long  => "--delete_identity ACCOUNT_NAME",
+    :description => "Delete Identity"
+
+end
+
+
+
+cli = MyCLI.new
+cli.parse_options
+cli.config[:config_file] # 'foo.rb'
+puts "in con "+cli.config[:config_file]
+puts cli.config[:login]
+puts cli.to_yaml
+# ARGV = [ '-c', 'foo.rb', '-l', 'debug' ]
+
+
+end #module

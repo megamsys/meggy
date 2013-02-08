@@ -1,0 +1,25 @@
+require 'rubygems'
+require 'mixlib/cli'
+require 'yaml'
+
+require 'nm/help'
+
+class Parse 
+
+  include Mixlib::CLI
+
+attr_accessor :name_args
+
+def initialize(args=[])
+		@name_args = parse_options(args)
+end
+
+def parse_options(args=[])
+puts super
+    rescue OptionParser::InvalidOption => e
+      puts "Error: " + e.to_s
+	hel = Help.new
+      hel.list
+      exit(1)
+end
+end
