@@ -1,10 +1,10 @@
 # Meggy
 
-Meggy is a mini tooset used to bring automation to your compute cloud (ec2).
-Credit goes to github.com/opscode/chef for providing code to build CLI's faster. 
+Meggy is a mini tooset used to bring instrumentation to your compute cloud (ec2).
+`Credit` goes to `github.com/opscode/chef` for providing code to build CLI's faster. 
 
-This uses mixlib-cli, mixlib-config, mixlib-log, mixlib-auth and the same approach on how the subcommands/config are 
-used.
+This uses mixlib-cli, mixlib-config, mixlib-log, mixlib-auth and the same approach on how 
+the subcommands/config are used.
 
 ### Requirements
 
@@ -48,12 +48,12 @@ cd ~/meggy/bin/
 
 # License
 
-Meggy - A toolset to be used by megam systems for managing compute cloud.
+Meggy - A toolset to be used by megam systems for instrumenting compute cloud.
 This is used in conjuction with Chef (chef.megam.co)
 
 |                      |                                          |
 |:---------------------|:-----------------------------------------|
-| **Author:**          | Kishorekumar (kishore<megam@megam.co.in>)
+| **Author:**          | Kishorekumar (<megam@megam.co.in>)
 | **Copyright:**       | Copyright (c) 2012-2013 Megam Systems.
 | **License:**         | Apache License, Version 2.0
 
@@ -68,5 +68,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-Wiki](http://wiki.opscode.com/display/Meggy/Home) is the definitive
-source of user documentation.
+[Docs](http://docs.megam.co) is the definitive source of user documentation.
