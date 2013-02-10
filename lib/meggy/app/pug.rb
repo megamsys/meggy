@@ -17,13 +17,29 @@ require 'meggy/pug'
 require 'meggy/app'
 require 'mixlib/log'
 
-
+#Pug : The maa CLI interface which is used for cloud instrumenting cloud infrastructure provisioned by
+#CHEF.
+#
 class Meggy::App::Pug < Meggy::App
 
   NO_COMMAND_GIVEN = "You need to pass a sub-command (e.g., pug SUB-COMMAND)\n"
 
   banner "Usage: pug sub-command (options)"
+  
+  #We need to debate why and where will each of these common options be used.
+  option :config_file,
+    :short => "-c CONFIG",
+    :long => "--config CONFIG",
+    :description => "The configuration file to use",
+    :proc => lambda { |path| File.expand_path(path, Dir.pwd) }
 
+  verbosity_level = 0
+  option :verbosity,
+    :short => '-V',
+    :long => '--verbose',
+    :description => "More verbose output. Use twice for max verbosity",
+    :proc => Proc.new { verbosity_level += 1},
+    :default => 0
 
   option :color,
     :long         => '--[no-]color',
@@ -31,10 +47,10 @@ class Meggy::App::Pug < Meggy::App
     :default      => true,
     :description  => "Use colored output, defaults to enabled"
 
-  option :enviromeggyent,
+  option :enviroment,
     :short        => "-E ENVIRONMENT",
     :long         => "--environment ENVIRONMENT",
-    :description  => "Set the Meggy enviromeggyent"
+    :description  => "Set the Meggy environment"
 
   option :editor,
     :short        => "-e EDITOR",
@@ -57,7 +73,7 @@ class Meggy::App::Pug < Meggy::App
     :boolean      => true,
     :exit         => 0
 
-    option :yes,
+  option :yes,
     :short => "-y",
     :long => "--yes",
     :description => "Say yes to all prompts for confirmation"
@@ -73,19 +89,25 @@ class Meggy::App::Pug < Meggy::App
     :boolean      => true,
     :proc         => lambda {|v| puts "Meggy: #{::Meggy::VERSION}"},
     :exit         => 0
-
-
-  # Run pug
+  # Run the "pug app". Let it roam and stay by our side.[Go pug, come back for us].
+  # The first thing run does is it parses the options. Once the first level of parsing is done,
+  # ie the help, no_command, sub_command entry is verified it proceeds to call 
+  # Meggy_Pug with the user entered options and arguments (ARGV)
   def run
     Mixlib::Log::Formatter.show_time = false
     validate_and_parse_options
     quiet_traps
-    Meggy::Pug.run(ARGV, options)
+    # As you see here the run method is a self method (static), hence the initialize in 
+    #Meggy_Pug doesn't get called yet during the below invocation.
+    Meggy::Pug.run(ARGV, options) 
     exit 0
   end
 
   private
 
+  ##Traps are being set for the following when an application starts.
+  ##SIGINT        2       Term    Interrupt from keyboard
+  ##SIGQUIT       3       Core    Quit from keyboard
   def quiet_traps
     trap("TERM") do
       exit 1
@@ -96,6 +118,8 @@ class Meggy::App::Pug < Meggy::App
     end
   end
 
+  # A check is performed to see of the command is entered, if a sub command exists, # 
+  # a version request or a help request.
   def validate_and_parse_options
     # Checking ARGV validity *before* parse_options because parse_options
     # mangles ARGV in some situations
@@ -125,7 +149,12 @@ class Meggy::App::Pug < Meggy::App
   def want_version?
     ARGV[0] =~ /^(--version|-v)$/
   end
-
+  
+  # Print the help message with the exit code.  If no command is given, then a fatal message is printed.
+  # The options are parsed by calling the parse_options present in the mixlib cli as extended by the super class app.
+  # A error gets caught and results in an ugly stack trace, which probably needs to be shown in an elegant way.
+  # The stacK should be logged using the debug_stacktrace method in the super class.
+  # The static method list_commands print the help of all the available commands.
   def print_help_and_exit(exitcode=1, fatal_message=nil)
 
     Meggy::Log.error(fatal_message) if fatal_message

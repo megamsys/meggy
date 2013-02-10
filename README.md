@@ -1,6 +1,10 @@
 # Meggy
 
 Meggy is a mini tooset used to bring automation to your compute cloud (ec2).
+Credit goes to github.com/opscode/chef for providing code to build CLI's faster. 
+
+This uses mixlib-cli, mixlib-config, mixlib-log, mixlib-auth and the same approach on how the subcommands/config are 
+used.
 
 ### Requirements
 
@@ -16,18 +20,26 @@ be installed with a simple `gem install bundler`. Afterwords, do the following:
 
 ### Installing Meggy
 
+You can use this gem by putting the following inside your Gemfile:
 
-Once your repository is set up, you can start working on the code. We do use
-TDD with RSpec, so you'll need to get a development environment running.
+    gem "meggy", "0.1" *coming soon.
+
+Once your repository is set up, you can run from the bin directory
+
+```cd ~/meggy/bin/
+./pug
+```
 
 ### Commands
 
-
-	pug	server create
+```
+	pug	login
 	
-	pug server status
+	pug identity create
 	
-	pug server start
+	pug identity delete
+	
+	pug identity list
 	
 	pug server stop
 	
@@ -38,7 +50,7 @@ TDD with RSpec, so you'll need to get a development environment running.
 	pug login
 
 	pug login 2 {2 => number of instances of the same server you wish to login}
-
+```
 
 # License
 

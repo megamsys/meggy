@@ -13,12 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 require 'rubygems'
-require 'highline/import'
+
 class Meggy
   class Text
+
+    attr_reader :stdout
+    attr_reader :stderr
+    attr_reader :stdin
+    attr_reader :config
+    
+    def initialize(stdout, stderr, stdin, config)
+      @stdout, @stderr, @stdin, @config = stdout, stderr, stdin, config
+    end
+
+    def highline
+      @highline ||= begin
+      require 'highline'
+      HighLine.new
+      end
+    end
+
     # Prints a message to stdout. Aliased as +info+ for compatibility with
     # the logger API.
-    
+
     def msg(message)
       stdout.puts message
     end
@@ -58,7 +75,7 @@ class Meggy
     # terminal, colored output is never used
     def color?
       ##Chef::Config[:color] && stdout.tty? && !Chef::Platform.windows?
-	:red
+      :red
     end
 
     def ask(*args, &block)
@@ -76,7 +93,6 @@ class Meggy
       msg @presenter.format(data)
     end
 
-   
     def ask_question(question, opts={})
       question = question + "[#{opts[:default]}] " if opts[:default]
 
