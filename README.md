@@ -24,15 +24,16 @@ You can use this gem by putting the following inside your Gemfile:
 
     gem "meggy", "0.1" *coming soon.
 
-Once your repository is set up, you can run from the bin directory
+Once you clone this repository, you can run from the bin directory
 
-```cd ~/meggy/bin/
+```bash
+cd ~/meggy/bin/
 ./pug
 ```
 
 ### Commands
 
-```
+```ruby
 	pug	login
 	
 	pug identity create
@@ -41,15 +42,8 @@ Once your repository is set up, you can run from the bin directory
 	
 	pug identity list
 	
-	pug server stop
-	
-	pug sftp get
-	
-	pug sftp put
-	
 	pug login
 
-	pug login 2 {2 => number of instances of the same server you wish to login}
 ```
 
 # License
