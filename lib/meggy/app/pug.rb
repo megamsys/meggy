@@ -165,8 +165,7 @@ class Meggy::App::Pug < Meggy::App
       puts "#{e}\n"
     end
     puts self.opt_parser
-    Meggy::Pug.list_commands
-
+    Meggy::Pug.list_commands 
     exit exitcode
   end
 

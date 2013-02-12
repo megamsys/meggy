@@ -87,5 +87,4 @@ class Meggy::App
       Process.exit err
     end
   end
-
 end

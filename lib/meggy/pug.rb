@@ -295,6 +295,7 @@ class Meggy
     # Create a new instance of the current class configured for the given
     # arguments and options
     def initialize(argv=[])
+puts "TEST"
       super() 
       @text = Text.new(STDOUT, STDERR, STDIN, config)
       command_name_words = self.class.snake_case_name.split('_')

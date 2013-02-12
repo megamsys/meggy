@@ -3,7 +3,7 @@ require 'meggy/pug'
 class Meggy
   class Pug
     class IdentityCreate < Pug
-      
+      #attr_accessor :name_args
     deps do
       #We'll include our API client as the dependency.
       #
@@ -19,7 +19,7 @@ class Meggy
         if @account_name.nil?
           show_usage
           text.fatal("You must specify an account name")
-          exit 1
+          #exit 1
         end
         puts name_args[0]
       end
