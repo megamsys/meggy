@@ -56,6 +56,7 @@ class Meggy
     def self.reset_subcommands!
       @@subcommands = {}
       @subcommands_by_category = nil
+	puts "newcate  #{@@subcommands}"
     end
 
     # As per the ruby doc, Callback(which in case is inherited) invoked whenever a
@@ -83,6 +84,7 @@ class Meggy
     #   category('species alien')
     def self.category(new_category)
       @category = new_category
+	puts "new cate  #{new_catedory}"
     end
 
     # The category is normally determined from the first word of the command
@@ -91,6 +93,7 @@ class Meggy
     # identity_create commands would be in the 'identity' category by default.
     def self.subcommand_category
       @category || snake_case_name.split('_').first unless unnamed?
+     #puts "sncm #{snake_case_name}"
     end
 
     def self.common_name
@@ -128,6 +131,7 @@ class Meggy
     def self.file_load_commands
       subcommand_files.each { |subcommand| Kernel.load subcommand }
       true
+	#subcommand_files.each { |subcommand| puts "#{subcommand}" } 
     end
     
     #Lists all the subcommand .rb files under the MEGGYROOT/lib/meggy/<app>*.rb
@@ -141,7 +145,8 @@ class Meggy
       # The "require paths" of the core meggy subcommands bundled with meggy
       #  __FILE__ points to ~meggy/lib/meggy/pug.rb
       # Grab the directory of pug command files.
-      files = Dir[File.expand_path('../pug/*.rb', __FILE__)] #
+      files = Dir[File.expand_path('../pug/*.rb', __FILE__)]
+      #files.each { |x| puts "#{x}"} #
       subcommand_files = {}
       # Under each of the meggy/pug directory, Grab the *.rb files.
       # subcommand_files stores it in a hash 
@@ -149,6 +154,7 @@ class Meggy
       files.each do |meggy_command_file|
         rel_path = meggy_command_file[/#{MEGGY_ROOT}#{Regexp.escape(File::SEPARATOR)}(.*)\.rb/,1]
         subcommand_files[rel_path] = meggy_command_file
+       #puts "hai #{rel_path}"
       end
       subcommand_files
     end
@@ -162,7 +168,7 @@ class Meggy
     def self.subcommands_by_category
       unless @subcommands_by_category
         @subcommands_by_category = Hash.new { |hash, key| hash[key] = [] } # create a new hash, with empty keys.
-        subcommands.each do |snake_cased, klass|   # for each of the subcommands loaded,
+        subcommands.each do |snake_cased, klass| #puts "#{snake_cased}:#{klass.subcommand_category}"  # for each of the subcommands loaded,
           @subcommands_by_category[klass.subcommand_category] << snake_cased # mutation of key identity, eg: {"identity"=>["identity_list"]}
         end
       end
@@ -185,7 +191,8 @@ class Meggy
       
       #show the commands, by calling their banner.
       commands_to_show.sort.each do |category, commands|
-        next if category =~ /deprecated/i
+        next if category =~ /deprecated/i 
+            
         msg "** #{category.upcase} COMMANDS **"
         commands.each do |command|
           msg subcommands[command].banner if subcommands[command]

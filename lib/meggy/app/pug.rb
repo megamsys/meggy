@@ -73,6 +73,12 @@ class Meggy::App::Pug < Meggy::App
     :boolean      => true,
     :exit         => 0
 
+  option :log,
+    :short => "-l",
+    :long => "--log",
+    :description => "Verify your log"
+  
+
   option :yes,
     :short => "-y",
     :long => "--yes",
@@ -100,6 +106,7 @@ class Meggy::App::Pug < Meggy::App
     # As you see here the run method is a self method (static), hence the initialize in 
     #Meggy_Pug doesn't get called yet during the below invocation.
     Meggy::Pug.run(ARGV, options) 
+    puts "#[ARGV]"
     exit 0
   end
 
