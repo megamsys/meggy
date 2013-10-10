@@ -1,4 +1,3 @@
-
 require "securerandom"
 require 'megam/core/account'
 require 'megam/core/config'
@@ -10,48 +9,43 @@ class Meggy
   class Pug
     class AccountCreate < Pug
       #attr_accessor :name_args
-    deps do
+      
+      deps do
       #We'll include our API client as the dependency.
+      end
       
-    end
-
-
       banner "pug account create EMAIL(options)"
-      
+ 
       def run
-        @account_name = @name_args[0]
-	      
-       if @account_name.nil?
-          #show_usage
-          text.fatal("You must specify an email name")
-          #exit 1
-        
+        @email = @name_args[0]        
+       if @email.nil?         
+          text.fatal("You must specify an email")
+          show_usage
+          exit 1        
        else
-        options = { :id => 00, :email => @account_name, :api_key => generate_api_token, :authority => "admin"}
-             
-                begin
+            options = { :id => "0", :email => @email,:api_key => generate_api_token, :authority => "admin"}
+            begin
                 Megam::Config[:email] = options[:email]
                 Megam::Config[:api_key] = options[:api_key]
-                @excon_res = Megam::Account.create(options)             
-                 rescue Megam::API::Errors::ErrorWithResponse => ewr      
-                   @res = ewr.response
-                   ress = @res.data[:body].some_msg
-                   text.error(ress[:msg])
-                   text.msg "#{text.color("Retry Again", :white, :bold)}"
-                   text.info(ress[:links])                                               
-                 else
-                   ress = @excon_res.data[:body].some_msg 
-                   text.info(ress[:msg])
-                   text.info(ress[:links])
-                 end                                   
-        end
-         
+                @excon_res = Megam::Account.create(options)   
+                ress = @excon_res.data[:body].some_msg 
+                text.info(ress[:msg])
+                text.info(ress[:links])         
+            #rescue other errors like connection refused by megam_play     
+            rescue Megam::API::Errors::ErrorWithResponse => ewr      
+                 res = ewr.response.data[:body].some_msg
+                 text.error(res[:msg])
+                 text.msg("#{text.color("Retry Again", :white, :bold)}")
+                 text.info(res[:links])                                              
+            end                                   
+        end         
       end
-private
+      
+      private
+      def generate_api_token
+        api_token = SecureRandom.urlsafe_base64(nil, true)
+      end
 
-  def generate_api_token
-    api_token = SecureRandom.urlsafe_base64(nil, true)
-  end
     end
   end
 end
