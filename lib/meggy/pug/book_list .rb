@@ -2,7 +2,7 @@ require 'meggy/pug'
 
 class Meggy
   class Pug
-    class IdentityList < Pug
+    class BookList < Pug
 
 
       option :help,
@@ -12,7 +12,7 @@ class Meggy
     :on => :tail,
     :boolean => true
 
-      banner "pug identity list (options)"
+      banner "pug book list (options)"
         
       def run
         puts "Identity Listed"
