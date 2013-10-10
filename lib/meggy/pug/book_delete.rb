@@ -2,9 +2,9 @@ require 'meggy/pug'
 
 class Meggy
   class Pug
-    class IdentityDelete < Pug
+    class BookDelete < Pug
 
-      banner "pug identity delete REGEX (options)"
+      banner "pug book delete (options)"
       def run
         puts "Action : IdentityDelete entry"
         if name_args.length < 1

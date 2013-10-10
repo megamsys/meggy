@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.homepage = "http://megam.co/"
   gem.summary = "CLI to deploy identity and integrate apps live on Megam."
   gem.description = "Command-line tool to deploy identity and manage identity, integrate live on Megam."
-  gem.executables = "nm"
+  gem.executables = "pug"
   gem.license = "Apache V2"
   gem.post_install_message = <<-MESSAGE
 ! The `meggy` gem has been deprecated and replaced with the Heroku Toolbelt.
