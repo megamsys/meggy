@@ -77,6 +77,10 @@ class Meggy
       ##Chef::Config[:color] && stdout.tty? && !Chef::Platform.windows?
       :red
     end
+    
+    def agree(*args, &block)
+      highline.agree(*args, &block)
+    end
 
     def ask(*args, &block)
       highline.ask(*args, &block)

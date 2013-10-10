@@ -71,6 +71,7 @@ class Meggy::App::Pug < Meggy::App
     :description  => "Show this message",
     :on           => :tail,
     :boolean      => true,
+    :show_options => true,
     :exit         => 0
 
   option :yes,
