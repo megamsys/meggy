@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+require 'megam/core/log'
 require 'meggy/pug'
 require 'meggy/app'
 require 'mixlib/log'
@@ -165,7 +165,7 @@ class Meggy::App::Pug < Meggy::App
   # The static method list_commands print the help of all the available commands.
   def print_help_and_exit(exitcode=1, fatal_message=nil)
 
-    Meggy::Log.error(fatal_message) if fatal_message
+    Megam::Log.error(fatal_message) if fatal_message
 
     begin
       self.parse_options

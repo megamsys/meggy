@@ -1,4 +1,6 @@
-require 'meggy/pug'
+require File.expand_path("#{File.dirname(__FILE__)}/../lib/meggy/pug")
+require File.expand_path("#{File.dirname(__FILE__)}/../lib/meggy/pug/account_create")
+#require 'meggy/pug'
 require 'meggy/pug/identity_create'
 require 'meggy/config'
 require 'yaml'
