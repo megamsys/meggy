@@ -1,5 +1,5 @@
 require 'meggy/pug'
-require 'meggy/core/text'
+#require 'meggy/core/text'
 
 class Meggy
   class Pug

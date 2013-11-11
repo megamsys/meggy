@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'meggy/core/log'
+require 'megam/core/log'
 require 'mixlib/config'
 
 class Meggy

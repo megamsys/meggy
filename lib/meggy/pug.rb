@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+#require File.expand_path("#{File.dirname(__FILE__)}/../version")
 require 'meggy/version'
 require 'mixlib/cli'
 require 'pp'
-require 'meggy/core/text'
 require 'net/http'
+require 'megam/core/log'
 
 class Meggy
   class Pug
@@ -33,9 +33,9 @@ class Meggy
     attr_accessor :text
     
     def self.text
-      @text ||= Meggy::Text.new(STDOUT, STDERR, STDIN, {})
+      @text ||= Megam::Text.new(STDOUT, STDERR, STDIN, {})
     end
-    
+ 
     # I don't think we need this method. Will remove it later.
     # We need to just call text.msg
     def self.msg(msg="")
@@ -303,7 +303,8 @@ class Meggy
     # arguments and options
     def initialize(argv=[])
       super() 
-      @text = Text.new(STDOUT, STDERR, STDIN, config)
+      #@text = Text.new(STDOUT, STDERR, STDIN, config)
+      @text ||= Megam::Text.new(STDOUT, STDERR, STDIN, config)
       command_name_words = self.class.snake_case_name.split('_')
 
       # Mixlib::CLI ignores the embedded name_args
@@ -400,9 +401,8 @@ class Meggy
       end
 
       Mixlib::Log::Formatter.show_time = false
-      Meggy::Log.init(Meggy::Config[:log_location])
-      Meggy::Log.level(Meggy::Config[:log_level] || :error)
-
+      Megam::Log.init(Meggy::Config[:log_location])
+      Megam::Log.level(Meggy::Config[:log_level] || :error)
       if Meggy::Config[:node_name] && Meggy::Config[:node_name].bytesize > 90
         # node names > 90 bytes only work with authentication protocol >= 1.1
         # see discussion in config.rb.
@@ -419,7 +419,7 @@ class Meggy
       end
       # Don't try to load a pug.rb if it doesn't exist.
       if config[:config_file]
-        Meggy::Log.debug("Using configuration from #{config[:config_file]}")
+        Megam::Log.debug("Using configuration from #{config[:config_file]}")
         read_config_file(config[:config_file])
       else
       # ...but do log a message if no config was found.

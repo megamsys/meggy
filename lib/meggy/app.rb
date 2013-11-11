@@ -19,7 +19,7 @@ require 'pp'
 #ruby tries to load the deprecated Config class from ruby lib.
 require 'meggy/config'
 require 'meggy/core/exceptions'
-require 'meggy/core/log'
+require 'megam/core/log'
 require 'mixlib/cli'
 require 'tmpdir'
 require 'rbconfig'
