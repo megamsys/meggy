@@ -1,5 +1,5 @@
 require 'meggy/pug'
-
+require File.expand_path("#{File.dirname(__FILE__)}/../lib/meggy")
 class Meggy
   class Pug
     class BookCreate < Pug

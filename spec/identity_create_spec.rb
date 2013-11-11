@@ -1,4 +1,5 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../lib/meggy/pug")
+require File.expand_path("#{File.dirname(__FILE__)}/../lib/meggy")
 require File.expand_path("#{File.dirname(__FILE__)}/../lib/meggy/pug/account_create")
 #require 'meggy/pug'
 require 'meggy/pug/identity_create'
