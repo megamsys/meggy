@@ -1,11 +1,11 @@
 require 'meggy/pug'
-require 'meggy/pug/account_create'
+require 'meggy/pug/book_create'
 require 'meggy/config'
 require 'yaml'
 
 describe "RSPEC for Identity List" do
 
-  it "Identity create command Success" do
+  it "Book:Create" do
 	  @id = Meggy::Pug::AccountCreate.new
 	@id.name_args = ["alrin"]
 	@id.run
@@ -13,7 +13,7 @@ describe "RSPEC for Identity List" do
   end
 
 
-  it "Identity create command fail" do
+  it "Book:Create" do
 	  @id = Meggy::Pug::AccountCreate.new
 	@id.name_args = ""
 	@id.run

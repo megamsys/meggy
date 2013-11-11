@@ -1,24 +1,23 @@
 require 'meggy/pug'
-require 'meggy/pug/account_create'
+require 'meggy/pug/book_list'
 require 'meggy/config'
 require 'yaml'
 
-describe "RSPEC for Identity Creation" do
+describe "Book:Show" do
 
-  it "Identity create command Success" do
-	  @id = Meggy::Pug::AccountCreate.new
+  it "Book:Show" do
+	  @id = Meggy::Pug::BookList.new
 	@id.name_args = ["alrin"]
 	@id.run
 	puts "SUCCESS"
   end
 
 
-  it "Identity create command fail" do
-	  @id = Meggy::Pug::AccountCreate.new
+  it "Book:Show" do
+	@id = Meggy::Pug::BookList.new
 	@id.name_args = ""
 	@id.text.should_receive(:fatal).with("You must specify an account name")
 	@id.run.should raise_error()
-	puts "FAIL"
   end
 
 end
