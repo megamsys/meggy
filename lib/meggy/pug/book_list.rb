@@ -1,18 +1,13 @@
 require 'meggy/pug'
 
-
 class Meggy
   class Pug
     class BookList < Pug
 
-
-      option :help,
-    :short => "-h",
-    :long => "--help",
-    :description => "Show this message",
-    :on => :tail,
-    :boolean => true
-
+deps do
+      #We'll include our API client as the dependency.
+      #
+    end
       banner "pug book list (options)"
         
       def run
@@ -22,4 +17,3 @@ class Meggy
     end
   end
 end
-
