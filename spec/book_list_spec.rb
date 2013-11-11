@@ -3,7 +3,7 @@ require 'meggy/pug/book_list'
 require 'meggy/config'
 require 'yaml'
 
-describe "Book:Show" do
+describe "RSPEC for Book List" do
 
   it "Book:Show" do
 	  @id = Meggy::Pug::BookList.new

@@ -3,26 +3,23 @@ require "meggy/version"
 
 Gem::Specification.new do |gem|
   gem.name = "meggy"
-  gem.version = Meggy::VERSION
-  gem.authors     = ["Kishorekumar Neelamegam, Thomas Alrin"]
-  gem.email = "support@megam.co"
+  gem.version = Meggy::VERSION  
+  gem.authors     = ["Kishorekumar Neelamegam","Thomas Alrin","Rajthilak"]
+  gem.email = ["nkishore@megam.co.in", "alrin@megam.co.in", "rajthilak@megam.co.in"]
   gem.homepage = "https://github.com/indykish/meggy"
-  gem.summary = "CLI to deploy identity and integrate apps live on Megam."
-  gem.description = "Command-line tool to deploy identity and manage identity, integrate live on Megam."
-  gem.executables = "pug"
   gem.license = "Apache V2"
-  gem.post_install_message = <<-MESSAGE
-! The `meggy` gem has been deprecated and replaced with the Heroku Toolbelt.
-! Download and install from: https://megam.co/download
-MESSAGE
-  #gem.files = %x{ git ls-files }.split("\n").select { |d| d =~ %r{^(License|README|bin/|data/|ext/|lib/|spec/|test/)} }
+  gem.extra_rdoc_files = ["README.md", "LICENSE" ]
+  gem.summary = "CLI to manage apps on megam (https://www.megam.co)."
+  gem.description = "Command-line tool to deploy apps and manage apps Megam(https://www.megam.co)."
   gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,fea,tures}/*`.split("\n")
+  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.require_paths = ["lib"]
-
   gem.add_runtime_dependency 'megam_api'
-  gem.add_dependency "rest-client", "~> 1.6.1"
-  gem.add_dependency "launchy", ">= 0.3.2"
-  gem.add_dependency "rubyzip"
+  gem.add_runtime_dependency 'launchy'
+  s.add_runtime_dependency 'rubyzip'
+  s.add_runtime_dependency 'mixlib-config'
+  s.add_runtime_dependency 'mixlib-log'
+  s.add_development_dependency 'rspec'   
+  gem.files         = `git ls-files`.split("\n")
 end
