@@ -1,5 +1,5 @@
 require 'meggy/pug'
-require 'meggy/pug/identity_create'
+require 'meggy/pug/account_create'
 require 'meggy/config'
 require 'yaml'
 
@@ -39,7 +39,7 @@ def locate_config_file
 end
 
 describe "RSPEC for config" do
-  @id = Meggy::Pug::IdentityCreate.new
+  @id = Meggy::Pug::AccountCreate.new
   @test = Meggy::Pug.find_subcommands_via_dirglob
   @test1 = Meggy::Pug.new
   @test.each do |data|

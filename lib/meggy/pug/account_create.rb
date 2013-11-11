@@ -24,6 +24,7 @@ class Meggy
           exit 1        
        else
             options = { :id => "0", :email => @email,:api_key => generate_api_token, :authority => "admin"}
+            text.info("start")
             begin
                 Megam::Config[:email] = options[:email]
                 Megam::Config[:api_key] = options[:api_key]
@@ -41,7 +42,9 @@ class Meggy
         end         
       end
       
-      private
+      private      
+      
+    
       def generate_api_token
         api_token = SecureRandom.urlsafe_base64(nil, true)
       end
