@@ -1,0 +1,54 @@
+PATH
+  remote: .
+  specs:
+    meggy (0.1)
+      launchy
+      megam_api
+      mixlib-config
+      mixlib-log
+      rubyzip
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    addressable (2.3.5)
+    diff-lcs (1.2.5)
+    excon (0.29.0)
+    highline (1.6.20)
+    hpricot (0.8.6)
+    launchy (2.3.0)
+      addressable (~> 2.3)
+    megam_api (0.1.0)
+      excon
+      highline
+      mixlib-config
+      mixlib-log
+      yajl-ruby
+    mixlib-config (2.0.0)
+    mixlib-log (1.6.0)
+    mustache (0.99.4)
+    rack (1.5.2)
+    rdiscount (2.1.7)
+    ronn (0.7.3)
+      hpricot (>= 0.8.2)
+      mustache (>= 0.7.0)
+      rdiscount (>= 1.5.8)
+    rspec (2.14.1)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    rspec-core (2.14.7)
+    rspec-expectations (2.14.4)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.14.4)
+    rubyzip (1.1.0)
+    yajl-ruby (1.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  meggy!
+  rack (~> 1.5.1)
+  ronn
+  rspec
