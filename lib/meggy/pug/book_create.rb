@@ -12,30 +12,33 @@ class Meggy
       #We'll include our API client as the dependency.
       #
     end
-
+    
+    
      option :appname,
-    :short => "-a",
-    :long => "--app",
-    :description => "Application name",
-    :default => false     
+    :short => "-a APP",
+    :long => "--app APP",
+    :description => "The application type to use [java,rails,play,akka,nodejs]",
+    :required => true    
 
+    option :scm,
+    :short => "-s GITREPOS",
+    :long => "--scm GITREPOS",
+    :description => "The source control management repository to use: eg:[https://github.com/username/yourepos.git]",
+    :required => true 
+        
     option :domain,
-    :short => "-D",
-    :long => "--domain",
-    :description => "Domain name",
-    :default => "master.megam.co"
+    :short => "-D DOMAIN",
+    :long => "--domain DOMAIN",
+    :description => "The domain name to use. [eg: pogo.com]",
+    :default => "megam.co"
     
     option :crosscloud,
-    :short => "-r",
-    :long => "--crosscloud",
-    :description => "Cross cloud",
+    :short => "-r CROSSCLOUDNAME",
+    :long => "--crosscloud CROSSCLOUDNAME",
+    :description => "The cross cloud setting to use.",
     :default => "iaas-default"
     
-    option :scm,
-    :short => "-s",
-    :long => "--scm",
-    :description => "Source Control Management",
-    :default => false
+    
     
       banner "pug book create (options)"
       
