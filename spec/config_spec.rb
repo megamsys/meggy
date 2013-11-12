@@ -49,11 +49,11 @@ describe "RSPEC for config" do
   acc_name = Meggy::Config[:node_name]
   @id.name_args = acc_name
   it "should return node name" do
-Meggy::Config[:node_name].should == "alrin"
+    Meggy::Config[:node_name].should == "alrin"
   end
   it "should return node name fail" do
-   puts "Node name : "+Meggy::Config[:node_name]
-	Meggy::Config[:node_name].should_not == "alrin"
+    puts "Node name : "+Meggy::Config[:node_name]
+    Meggy::Config[:node_name].should_not == "alrin"
   end
 
 end
