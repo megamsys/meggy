@@ -17,9 +17,9 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.add_runtime_dependency 'megam_api'
   gem.add_runtime_dependency 'launchy'
-  s.add_runtime_dependency 'rubyzip'
-  s.add_runtime_dependency 'mixlib-config'
-  s.add_runtime_dependency 'mixlib-log'
-  s.add_development_dependency 'rspec'   
+  gem.add_runtime_dependency 'rubyzip'
+  gem.add_runtime_dependency 'mixlib-config'
+  gem.add_runtime_dependency 'mixlib-log'
+  gem.add_development_dependency 'rspec'   
   gem.files         = `git ls-files`.split("\n")
 end

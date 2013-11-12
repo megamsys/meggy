@@ -7,7 +7,7 @@ describe "Account:Create" do
 
   it "Account create command Success" do
 	  @id = Meggy::Pug::AccountCreate.new
-	@id.name_args = ["alrin"]
+	@id.name_args = ["test@meggy.com"]
 	@id.run
 	puts "SUCCESS"
   end
