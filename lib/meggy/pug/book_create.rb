@@ -45,10 +45,10 @@ class Meggy
             # cc   = config[:crosscloud] || text.ask("Enter crosscloud name: ", :default => "iaas-default")   
             #scm   = config[:scm] || text.ask("Enter scm: ")  {|q| q.echo = true} 
 
-            app_name = config[:appname] 
+            app_name = config[:appname]  if config[:appname]
             domain   = config[:domain] 
             cc   = config[:crosscloud]   
-            scm   = config[:scm] 
+            scm   = config[:scm]  if config[:scm]
            
         if app_name.nil?
           show_usage
