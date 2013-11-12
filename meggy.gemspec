@@ -26,4 +26,5 @@ MESSAGE
   gem.add_runtime_dependency 'launchy'
   gem.add_development_dependency 'rspec'
   gem.add_runtime_dependency 'rubyzip'
+  gem.add_runtime_dependency 'randexp'
 end

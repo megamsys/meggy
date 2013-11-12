@@ -3,7 +3,7 @@ require 'megam/core/config'
 require 'megam/core/error'
 require "megam/core/text"
 require 'megam/api'
-
+require 'randexp'
 class Meggy
   class Pug
     class BookCreate < Pug
@@ -38,47 +38,51 @@ class Meggy
     :description => "The cross cloud setting to use.",
     :default => "iaas-default"
     
-    
+    option :noofinstances,
+    :short => "-i NOOFINSTANCES",
+    :long => "--instance NOOFINSTANCES",
+    :description => "No on instances.",
+    :default => 1
     
       banner "pug book create (options)"
       
-      def run
-            #app_name = config[:appname] || text.ask("Enter Application name: "){|q| q.echo = true}
-            #domain   = config[:domain] || text.ask("Enter domain: ", :default =>"testmeg.megam.co")   
-            # cc   = config[:crosscloud] || text.ask("Enter crosscloud name: ", :default => "iaas-default")   
-            #scm   = config[:scm] || text.ask("Enter scm: ")  {|q| q.echo = true} 
-
-            app_name = config[:appname]  if config[:appname]
-            domain   = config[:domain] 
+      def run           
+            app_name = config[:appname] 
+            domain   = generate_domain+"."+config[:domain]             
             cc   = config[:crosscloud]   
-            scm   = config[:scm]  if config[:scm]
-           
+            scm   = config[:scm]
+            noi = config[:noofinstances].to_i
+            
         if app_name.nil?
           show_usage
           text.fatal("You must specify an book name")
           exit 1
         else
             
-            options = mk_node(app_name, domain, cc, scm)
+            options = mk_node(app_name, domain, cc, scm, noi)
             text.info("start")
             begin
                 Megam::Config[:email] = "#{ENV['MEGAM_API_EMAIL']}"
                 Megam::Config[:api_key] = "#{ENV['MEGAM_API_KEY']}"
-                @excon_res = Megam::Node.create(options)   
-                ress = @excon_res.data[:body].some_msg 
+                @excon_res = Megam::Node.create(options) 
+             for i in 0..(noi-1)
+                ress = @excon_res.data[:body][i].some_msg
                 text.info(ress[:msg])
                 text.info(ress[:links])         
+            end
             #rescue other errors like connection refused by megam_play     
-            rescue Megam::API::Errors::ErrorWithResponse => ewr      
-                 res = ewr.response.data[:body].some_msg
+            rescue Megam::API::Errors::ErrorWithResponse => ewr   
+               for i in 0..(noi-1)   
+                 res = ewr.response.data[:body][i].some_msg
                  text.error(res[:msg])
                  text.msg("#{text.color("Retry Again", :white, :bold)}")
-                 text.info(res[:links])                                              
+                 text.info(res[:links])
+                 end                                              
            end
         end       
       end
       
-      def mk_node(app_name, domain, cc, scm)
+      def mk_node(app_name, domain, cc, scm, noi)
       
       @com = {
 "systemprovider" => {
@@ -113,7 +117,7 @@ class Meggy
           "node_name" => domain,
   "node_type" => "BOLT",
   "req_type" => "create",
-  "noofinstances" => 2,
+  "noofinstances" => noi,
           "command" => @com,
           "predefs" => {"name" => app_name, "scm" => scm,
             "db" => "postgres@postgresql1.megam.com/morning.megam.co", "war" => "", "queue" => "queue@queue1", "runtime_exec" => "sudo start rails"},
@@ -126,8 +130,8 @@ node_hash
 end
 
 def generate_domain
-  @book_name = /\w+/.gen
-  @book_name.downcase
+  book_name = /\w+/.gen
+  book_name.downcase
 end
 
     end
