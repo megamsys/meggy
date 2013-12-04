@@ -41,30 +41,6 @@ class Meggy::App::Pug < Meggy::App
     :proc => Proc.new { verbosity_level += 1},
     :default => 0
 
-  option :color,
-    :long         => '--[no-]color',
-    :boolean      => true,
-    :default      => true,
-    :description  => "Use colored output, defaults to enabled"
-
-  option :enviroment,
-    :short        => "-E ENVIRONMENT",
-    :long         => "--environment ENVIRONMENT",
-    :description  => "Set the Meggy environment"
-
-  option :editor,
-    :short        => "-e EDITOR",
-    :long         => "--editor EDITOR",
-    :description  => "Set the editor to use for interactive commands",
-    :default      => ENV['EDITOR']
-
-  option :disable_editing,
-    :short        => "-d",
-    :long         => "--disable-editing",
-    :description  => "Do not open EDITOR, just accept the data as is",
-    :boolean      => true,
-    :defaut       => false
-
   option :help,
     :short        => "-h",
     :long         => "--help",
@@ -74,20 +50,10 @@ class Meggy::App::Pug < Meggy::App
     :show_options => true,
     :exit         => 0
 
-  option :log,
-    :short => "-l",
-    :long => "--log",
-    :description => "Verify your log"
-  
-
   option :yes,
     :short => "-y",
     :long => "--yes",
     :description => "Say yes to all prompts for confirmation"
-
-  option :defaults,
-    :long => "--defaults",
-    :description => "Accept default values for all questions"
 
   option :version,
     :short        => "-v",

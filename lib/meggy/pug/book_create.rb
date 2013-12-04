@@ -15,8 +15,8 @@ class Meggy
     
     
      option :appname,
-    :short => "-a APP",
-    :long => "--app APP",
+    :short => "-a APPTYPE",
+    :long => "--app APPTYPE",
     :description => "The application type to use [java,rails,play,akka,nodejs]",
     :required => true    
 
@@ -50,7 +50,20 @@ class Meggy
     :description => "No on instances.",
     :default => 1
     
-      banner "pug book create BOOKNAME (options)"
+    
+    option :email,
+    :short => "-e EMAIL",
+    :long => "--email EMAIL",
+    :description => "User's Email for which the book is created. [eg: a@b.com]. Default value will be get from conf file.",
+    :default => "config[:email]"
+    
+    option :apikey,
+    :short => "-k APIKEY",
+    :long => "--apikey APIKEY",
+    :description => "Apikey of the given email. [eg: oWEbCrBll4TRCR6MXrdMiw==]",
+    :default => "config[:apikey]"
+    
+      banner "pug book create BOOKNAME [options]"
       
       def run           
             #test book creation
@@ -66,9 +79,8 @@ class Meggy
             
             text.info("start")
             begin
-                        noi = config[:noofinstances].to_i
-               Megam::Config[:email] = "a@b.com"
-                Megam::Config[:api_key] = '5sZvuygWDpoHdWn0_x4xoQ=='
+                Megam::Config[:email] = Meggy::Config[:email] 
+                Megam::Config[:api_key] = Meggy::Config[:apikey] 
                 #Megam::Config[:email] = "#{ENV['MEGAM_API_EMAIL']}"
                 #Megam::Config[:api_key] = "#{ENV['MEGAM_API_KEY']}"
                 
@@ -81,19 +93,16 @@ class Meggy
     		node_hash=Megam::MakeNode.create(data, "server", "create")
     		
                 @excon_res = Megam::Node.create(node_hash) 
-             for i in 0..(noi-1)
-                ress = @excon_res.data[:body][i].some_msg
+
+                ress = @excon_res.data[:body]
                 text.info(ress[:msg])
                 text.info(ress[:links])         
-            end
             #rescue other errors like connection refused by megam_play     
             rescue Megam::API::Errors::ErrorWithResponse => ewr   
-               for i in 0..(noi-1)   
-                 res = ewr.response.data[:body][i].some_msg
+                 res = ewr.response.data[:body].some_msg
                  text.error(res[:msg])
                  text.msg("#{text.color("Retry Again", :white, :bold)}")
                  text.info(res[:links])
-                 end                                              
            end
         end       
       end

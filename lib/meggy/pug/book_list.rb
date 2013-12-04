@@ -14,10 +14,13 @@ deps do
       def run
         puts "Identity Listing..."
         begin
-               Megam::Config[:email] = "a@b.com"
-                Megam::Config[:api_key] = '5sZvuygWDpoHdWn0_x4xoQ=='
+                #Megam::Config[:email] = "b@b.com"
+                #Megam::Config[:api_key] = 'oWEbCrBll4TRCR6MXrdMiw=='
                 #Megam::Config[:email] = "#{ENV['MEGAM_API_EMAIL']}"
                 #Megam::Config[:api_key] = "#{ENV['MEGAM_API_KEY']}"
+                
+                Megam::Config[:email] = Meggy::Config[:email] 
+                Megam::Config[:api_key] = Meggy::Config[:apikey] 
                 @excon_res = Megam::Node.list
                 
                     rescue ArgumentError => ae

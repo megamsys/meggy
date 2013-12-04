@@ -3,9 +3,18 @@ require 'meggy/pug'
 class Meggy
   class Pug
     class BookDelete < Pug
+    
+    option :bookname,
+    :short => "-n BOOKNAME",
+    :long => "--bookname BOOKNAME",
+    :description => "Name of the book which you want to delete. [eg: book1.megam.co]",
+    :required => true    
+    
 
-      banner "pug book delete (options)"
+      banner "pug book delete BOOKNAME [options]"
       def run
+      
+=begin
         puts "Action : IdentityDelete entry"
         if name_args.length < 1
           show_usage
@@ -37,6 +46,29 @@ class Meggy
           identity.destroy
           text.msg("Deleted identity #{name}")
         end
+        
+=end
+       @book_name = @name_args[0]        
+       if @book_name.nil?         
+          text.fatal("You must specify a Book Name")
+          show_usage
+          exit 1        
+       else
+            
+            text.info("start")
+            begin
+                Megam::Config[:email] = Meggy::Config[:email] 
+                Megam::Config[:api_key] = Meggy::Config[:apikey] 
+    		node_hash=Megam::DeleteNode.create(@book_name, "server", "delete")
+		@excon_res = Megam::Request.create(node_hash)
+		rescue Megam::API::Errors::ErrorWithResponse => ewr   
+                 res = ewr.response.data[:body].some_msg
+                 text.error(res[:msg])
+                 text.msg("#{text.color("Retry Again", :white, :bold)}")
+                 text.info(res[:links])
+             end
+
+	end
       end
 
     end
