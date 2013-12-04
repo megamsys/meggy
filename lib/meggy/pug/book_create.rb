@@ -20,6 +20,12 @@ class Meggy
     :description => "The application type to use [java,rails,play,akka,nodejs]",
     :required => true    
 
+     option :type,
+    :short => "-t BOOK_TYPE",
+    :long => "--type BOOK_TYPE",
+    :description => "Type of your book [APP, BOLT]",
+    :required => true    
+    
     option :scm,
     :short => "-s GITREPOS",
     :long => "--scm GITREPOS",
@@ -27,7 +33,7 @@ class Meggy
     :required => true 
         
     option :domain,
-    :short => "-D DOMAIN",
+    :short => "-d DOMAIN",
     :long => "--domain DOMAIN",
     :description => "The domain name to use. [eg: pogo.com]",
     :default => "megam.co"
@@ -36,7 +42,7 @@ class Meggy
     :short => "-r CROSSCLOUDNAME",
     :long => "--crosscloud CROSSCLOUDNAME",
     :description => "The cross cloud setting to use.",
-    :default => "iaas-default"
+    :default => "sandbox_default"
     
     option :noofinstances,
     :short => "-i NOOFINSTANCES",
@@ -44,27 +50,37 @@ class Meggy
     :description => "No on instances.",
     :default => 1
     
-      banner "pug book create (options)"
+      banner "pug book create BOOKNAME (options)"
       
       def run           
-            app_name = config[:appname] 
-            domain   = generate_domain+"."+config[:domain]             
-            cc   = config[:crosscloud]   
-            scm   = config[:scm]
-            noi = config[:noofinstances].to_i
+            #test book creation
+            #./pug book create node -a rails -r sandbox_default -D megam.co -s test -t APP
+
             
-        if app_name.nil?
+       @book_name = @name_args[0]        
+       if @book_name.nil?         
+          text.fatal("You must specify a Book Name")
           show_usage
-          text.fatal("You must specify an book name")
-          exit 1
-        else
+          exit 1        
+       else
             
-            options = mk_node(app_name, domain, cc, scm, noi)
             text.info("start")
             begin
-                Megam::Config[:email] = "#{ENV['MEGAM_API_EMAIL']}"
-                Megam::Config[:api_key] = "#{ENV['MEGAM_API_KEY']}"
-                @excon_res = Megam::Node.create(options) 
+                        noi = config[:noofinstances].to_i
+               Megam::Config[:email] = "a@b.com"
+                Megam::Config[:api_key] = '5sZvuygWDpoHdWn0_x4xoQ=='
+                #Megam::Config[:email] = "#{ENV['MEGAM_API_EMAIL']}"
+                #Megam::Config[:api_key] = "#{ENV['MEGAM_API_KEY']}"
+                
+                excon_predef = Megam::Predef.show(config[:appname])
+                @predef=excon_predef.data[:body].lookup(config[:appname])
+                puts "===================================> @predef <============================================="
+                puts @predef.inspect
+                data={:book_name => @book_name, :book_type => config[:type] , :predef_cloud_name => config[:crosscloud], :provider => @predef.provider, :provider_role => @predef.provider_role, :domain_name => '.'+config[:domain], :no_of_instances => config[:noofinstances].to_i, :predef_name => config[:appname], :deps_scm => config[:scm], :deps_war => "#{config[:war]}", :timetokill => "#{Time.now}", :metered => "", :logging => "", :runtime_exec => @predef.runtime_exec}
+   
+    		node_hash=Megam::MakeNode.create(data, "server", "create")
+    		
+                @excon_res = Megam::Node.create(node_hash) 
              for i in 0..(noi-1)
                 ress = @excon_res.data[:body][i].some_msg
                 text.info(ress[:msg])
@@ -81,59 +97,6 @@ class Meggy
            end
         end       
       end
-      
-      def mk_node(app_name, domain, cc, scm, noi)
-      
-      @com = {
-"systemprovider" => {
-"provider" => {
-"prov" => "chef"
-}
-},
-"compute" => {
-"cctype" => "ec2",
-"cc" => {
-"groups" => "megam",
-"image" => "ami-d783cd85",
-"flavor" => "t1.micro"
-},
-"access" => {
-"ssh_key" => "megam_ec2",
-"identity_file" => "~/.ssh/megam_ec2.pem",
-"ssh_user" => "ubuntu"
-}
-},
-"cloudtool" => {
-"chef" => {
-"command" => "knife",
-"plugin" => "ec2 server create", #ec2 server delete or create
-"run_list" => "role[opendj]",
-"name" => "-N TestOverAll"
-}
-}
-}
-    
-        node_hash = {
-          "node_name" => domain,
-  "node_type" => "BOLT",
-  "req_type" => "create",
-  "noofinstances" => noi,
-          "command" => @com,
-          "predefs" => {"name" => app_name, "scm" => scm,
-            "db" => "postgres@postgresql1.megam.com/morning.megam.co", "war" => "", "queue" => "queue@queue1", "runtime_exec" => "sudo start rails"},
-  "appdefns" => {"timetokill" => "0", "metered" => "megam", "logging" => "megam", "runtime_exec" => "runtime_execTOM"},
-  "boltdefns" => {"username" => "tom", "apikey" => "123456", "store_name" => "tom_db", "url" => "", "prime" => "", "timetokill" => "", "metered" => "", "logging" => "", "runtime_exec" => ""},
-  "appreq" => {},
-  "boltreq" => {}
-    }
-node_hash
-end
-
-def generate_domain
-  book_name = /\w+/.gen
-  book_name.downcase
-end
-
     end
   end
 end

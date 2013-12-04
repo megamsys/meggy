@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 require 'meggy/pug'
+require "megam/core/text"
 
 class Meggy
   class Pug
@@ -22,21 +23,19 @@ class Meggy
       banner "pug help [list|TOPIC]"
       def run
         if name_args.empty?
-          ui.info "Usage: pug SUBCOMMAND (options)"
-          ui.msg ""
+          text.info "Usage: pug SUBCOMMAND (options)"
+          text.msg ""
           # This command is atypical, the user is likely not interested in usage of
           # this command, but pug in general. So hack the banner.
           opt_parser.banner = "General Pug Options:"
-          ui.msg opt_parser.to_s
-          ui.msg ""
-          ui.info "For further help:"
-          ui.info(<<-MOAR_HELP)
-  pug help list             list help topics
-  pug help pug            show general pug help
-  pug help TOPIC            display the manual for TOPIC
+          text.msg opt_parser.to_s
+          text.msg ""
+          text.info "For further help:"
+          text.info(<<-MOAR_HELP)
   pug SUBCOMMAND --help     show the options for a command
 MOAR_HELP
-          exit 1
+    Meggy::Pug.list_commands 
+         exit 1
         else
           @query = name_args.join('-')
         end

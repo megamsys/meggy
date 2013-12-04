@@ -14,7 +14,7 @@ class Meggy
       #We'll include our API client as the dependency.
       end
       
-      banner "pug account create EMAIL(options)"
+      banner "pug account create EMAIL (options)"
  
       def run
         @email = @name_args[0]        
