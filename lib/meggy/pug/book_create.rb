@@ -94,9 +94,13 @@ class Meggy
     		
                 @excon_res = Megam::Node.create(node_hash) 
 
-                ress = @excon_res.data[:body]
-                text.info(ress[:msg])
-                text.info(ress[:links])         
+
+puts "TEST ======================> "
+@excon_res.data[:body].each do |res|
+	puts res.class
+                text.info(res.some_msg[:msg])
+                end
+        
             #rescue other errors like connection refused by megam_play     
             rescue Megam::API::Errors::ErrorWithResponse => ewr   
                  res = ewr.response.data[:body].some_msg

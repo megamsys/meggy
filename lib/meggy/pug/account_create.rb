@@ -16,13 +16,19 @@ class Meggy
       
       banner "pug account create EMAIL (options)"
  
+ def isEmail(str)
+  return str.match(/[a-zA-Z0-9._%]@(?:[a-zA-Z0-9]\.)[a-zA-Z]{2,4}/)
+end
+
       def run
         @email = @name_args[0]        
-       if @email.nil?         
+       if @email.nil? && isEmail(@email).nil?         
           text.fatal("You must specify an email")
           show_usage
           exit 1        
        else
+       
+       if @email =~ /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
             options = { :id => "0", :email => @email,:api_key => generate_api_token, :authority => "admin"}
             text.info("start")
             begin
@@ -38,7 +44,10 @@ class Meggy
                  text.error(res[:msg])
                  text.msg("#{text.color("Retry Again", :white, :bold)}")
                  text.info(res[:links])                                              
-            end                                   
+            end 
+          else
+          text.fatal("You must specify a correct email")
+          end
         end         
       end
       

@@ -23,25 +23,19 @@ deps do
                 Megam::Config[:api_key] = Meggy::Config[:apikey] 
                 @excon_res = Megam::Node.list
                 
-                    rescue ArgumentError => ae
-      hash = {"msg" => ae.message, "msg_type" => "error"}
-      re = Megam::Error.from_hash(hash)
-      return re
-    rescue Megam::API::Errors::ErrorWithResponse => ewr
-      hash = {"msg" => ewr.message, "msg_type" => "error"}
-      re = Megam::Error.from_hash(hash)
-      return re
-    rescue StandardError => se
-      hash = {"msg" => se.message, "msg_type" => "error"}
-      re = Megam::Error.from_hash(hash)
-      return re
-      end
-                @nodes=@excon_res.data[:body]
+                                @nodes=@excon_res.data[:body]
                 text.msg("NODE NAME<-->TYPE<-->APP TYPE<-->CREATED AT")
                 @nodes.each do |n|
                 	text.msg(n.node_name+"<-->"+n.node_type+"<-->"+n.predefs[:name]+"<-->"+n.node.created_at)
                 end
                 
+             rescue Megam::API::Errors::ErrorWithResponse => ewr   
+                 res = ewr.response.data[:body].some_msg
+                 text.error(res[:msg])
+                 text.msg("#{text.color("Retry Again", :white, :bold)}")
+                 text.info(res[:links])
+           
+           end
        end
     end
   end
