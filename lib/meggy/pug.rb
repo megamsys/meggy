@@ -387,24 +387,14 @@ class Meggy
       Meggy::Config[:log_level] = :debug
       end
 
-      Meggy::Config[:node_name] = config[:node_name] if config[:node_name]
-      Meggy::Config[:client_key] = config[:client_key] if config[:client_key]
-      Meggy::Config[:meggy_server_url] = config[:meggy_server_url] if config[:meggy_server_url]
+      Meggy::Config[:email] = config[:email] if config[:email]
+      Meggy::Config[:api_key] = config[:api_key] if config[:api_key]
 
       # Expand a relative path from the config directory. Config from command
       # line should already be expanded, and absolute paths will be unchanged.
-      if Meggy::Config[:client_key] && config[:config_file]
-        Meggy::Config[:client_key] = File.expand_path(Meggy::Config[:client_key], File.dirname(config[:config_file]))
-      end
-
       Mixlib::Log::Formatter.show_time = false
       Megam::Log.init(Meggy::Config[:log_location])
-      Megam::Log.level(Meggy::Config[:log_level] || :error)
-      if Meggy::Config[:node_name] && Meggy::Config[:node_name].bytesize > 90
-        # node names > 90 bytes only work with authentication protocol >= 1.1
-        # see discussion in config.rb.
-        Meggy::Config[:authentication_protocol_version] = "1.1"
-      end
+      Megam::Log.level(Meggy::Config[:log_level] || :error)      
     end
 
     # configure meggy, to startwith locate the config file under .meggy/pug.rb
