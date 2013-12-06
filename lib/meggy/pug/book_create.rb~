@@ -80,13 +80,21 @@ class Meggy
             begin
                 Megam::Config[:email] = Meggy::Config[:email] 
                 Megam::Config[:api_key] = Meggy::Config[:apikey] 
+                #Megam::Config[:email] = "#{ENV['MEGAM_API_EMAIL']}"
+                #Megam::Config[:api_key] = "#{ENV['MEGAM_API_KEY']}"
+                
                 excon_predef = Megam::Predef.show(config[:appname])
                 @predef=excon_predef.data[:body].lookup(config[:appname])
+                puts "===================================> @predef <============================================="
+                puts @predef.inspect
                 data={:book_name => @book_name, :book_type => config[:type] , :predef_cloud_name => config[:crosscloud], :provider => @predef.provider, :provider_role => @predef.provider_role, :domain_name => '.'+config[:domain], :no_of_instances => config[:noofinstances].to_i, :predef_name => config[:appname], :deps_scm => config[:scm], :deps_war => "#{config[:war]}", :timetokill => "#{Time.now}", :metered => "", :logging => "", :runtime_exec => @predef.runtime_exec}
    
     		node_hash=Megam::MakeNode.create(data, "server", "create")
     		
                 @excon_res = Megam::Node.create(node_hash) 
+
+
+puts "TEST ======================> "
 @excon_res.data[:body].each do |res|
                 text.info(res.some_msg[:msg])
                 end
@@ -102,6 +110,35 @@ class Meggy
                  text.msg("#{text.color("Retry Again", :white, :bold)}")
            end
         end       
+=======
+          exit 1
+        else
+
+          begin
+            Megam::Config[:email] = Meggy::Config[:email]
+            Megam::Config[:api_key] = Meggy::Config[:apikey]
+
+            excon_predef = Megam::Predef.show(config[:appname])
+            @predef=excon_predef.data[:body].lookup(config[:appname])
+            data={:book_name => @book_name, :book_type => config[:type] , :predef_cloud_name => config[:crosscloud], :provider => @predef.provider, :provider_role => @predef.provider_role, :domain_name => '.'+config[:domain], :no_of_instances => config[:noofinstances].to_i, :predef_name => config[:appname], :deps_scm => config[:scm], :deps_war => "#{config[:war]}", :timetokill => "#{Time.now}", :metered => "", :logging => "", :runtime_exec => @predef.runtime_exec}
+
+            node_hash=Megam::MakeNode.create(data, "server", "create")
+
+            @excon_res = Megam::Node.create(node_hash)
+
+            @excon_res.data[:body].each do |res|
+              text.info(res.some_msg[:msg])
+            end
+
+            #rescue other errors like connection refused by megam_play
+          rescue Megam::API::Errors::ErrorWithResponse => ewr
+            res = ewr.response.data[:body].some_msg
+            text.error(res[:msg])
+            text.msg("#{text.color("Retry Again", :white, :bold)}")
+            text.info(res[:links])
+          end
+        end
+>>>>>>> origin
       end
     end
   end

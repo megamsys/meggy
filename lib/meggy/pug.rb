@@ -56,7 +56,6 @@ class Meggy
     def self.reset_subcommands!
       @@subcommands = {}
       @subcommands_by_category = nil
-	puts "newcate  #{@@subcommands}"
     end
 
     # As per the ruby doc, Callback(which in case is inherited) invoked whenever a
@@ -84,7 +83,6 @@ class Meggy
     #   category('species alien')
     def self.category(new_category)
       @category = new_category
-	puts "new cate  #{new_catedory}"
     end
 
     # The category is normally determined from the first word of the command
@@ -154,7 +152,6 @@ class Meggy
       files.each do |meggy_command_file|
         rel_path = meggy_command_file[/#{MEGGY_ROOT}#{Regexp.escape(File::SEPARATOR)}(.*)\.rb/,1]
         subcommand_files[rel_path] = meggy_command_file
-       #puts "hai #{rel_path}"
       end
       subcommand_files
     end
@@ -351,7 +348,7 @@ class Meggy
     def locate_config_file
       # Look for $HOME/.meggy/pug.rb
       if ENV['HOME']
-        user_config_file =  File.expand_path(File.join(ENV['HOME'], '.meggy', 'pug.rb'))
+        user_config_file =  File.expand_path(File.join(ENV['HOME'], '.megam', 'pug.rb'))
       end
 
       if File.exist?(user_config_file)

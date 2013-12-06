@@ -30,7 +30,6 @@ end
        
        if @email =~ /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
             options = { :id => "0", :email => @email,:api_key => generate_api_token, :authority => "admin"}
-            text.info("start")
             begin
                 Megam::Config[:email] = options[:email]
                 Megam::Config[:api_key] = options[:api_key]
