@@ -4,7 +4,7 @@ class Meggy
   class Pug
     class AccountShow < Pug
 
-
+      banner "pug account show EMAIL (options)"
       def run
         @email = @name_args[0]        
        if @email.nil?         

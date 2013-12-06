@@ -97,16 +97,18 @@ class Meggy
 
 puts "TEST ======================> "
 @excon_res.data[:body].each do |res|
-	puts res.class
                 text.info(res.some_msg[:msg])
                 end
         
             #rescue other errors like connection refused by megam_play     
-            rescue Megam::API::Errors::ErrorWithResponse => ewr   
+            rescue Megam::API::Errors::ErrorWithResponse => ewr  
                  res = ewr.response.data[:body].some_msg
                  text.error(res[:msg])
                  text.msg("#{text.color("Retry Again", :white, :bold)}")
                  text.info(res[:links])
+             rescue ArgumentError => ae
+                  text.error(ae)
+                 text.msg("#{text.color("Retry Again", :white, :bold)}")
            end
         end       
       end
