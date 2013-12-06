@@ -348,7 +348,7 @@ class Meggy
     def locate_config_file
       # Look for $HOME/.meggy/pug.rb
       if ENV['HOME']
-        user_config_file =  File.expand_path(File.join(ENV['HOME'], '.meggy', 'pug.rb'))
+        user_config_file =  File.expand_path(File.join(ENV['HOME'], '.megam', 'pug.rb'))
       end
 
       if File.exist?(user_config_file)

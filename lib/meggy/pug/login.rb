@@ -1,6 +1,6 @@
 require 'meggy/pug'
-#require 'meggy/core/text'
 
+#require 'meggy/core/text'
 class Meggy
   class Pug
     class  Login < Meggy::Pug
@@ -23,7 +23,7 @@ class Meggy
           exit 1
         end
         username            = config[:username] || ask_question("Enter Username: ", :default => "mugshot")
-        password = config[:password] || text.ask("Enter Password: ") {|q| q.echo = false}
+        password = config[:password] || text.ask("Enter API Key: ") {|q| q.echo = false}
         text.msg "Username:" + username
         text.msg "Password:" + password
       end

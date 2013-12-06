@@ -19,10 +19,7 @@ class Meggy
           @excon_res = Megam::Node.list
 
           @nodes=@excon_res.data[:body]
-          text.msg("NODE NAME<-->TYPE<-->APP TYPE<-->CREATED AT")
-          @nodes.each do |n|
-            text.msg(n.node_name+"<-->"+n.node_type+"<-->"+n.predefs[:name]+"<-->"+n.node.created_at)
-          end
+          text.summarize(@nodes)       
 
         rescue Megam::API::Errors::ErrorWithResponse => ewr
           res = ewr.response.data[:body].some_msg
