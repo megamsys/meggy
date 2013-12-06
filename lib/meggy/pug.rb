@@ -346,7 +346,7 @@ class Meggy
     end
 
     def locate_config_file
-      # Look for $HOME/.meggy/pug.rb
+      # Look for $HOME/.megam/pug.rb
       if ENV['HOME']
         user_config_file =  File.expand_path(File.join(ENV['HOME'], '.megam', 'pug.rb'))
       end
@@ -397,7 +397,7 @@ class Meggy
       Megam::Log.level(Meggy::Config[:log_level] || :error)      
     end
 
-    # configure meggy, to startwith locate the config file under .meggy/pug.rb
+    # configure meggy, to startwith locate the config file under .megam/pug.rb
     # Once located, read the pug.rb config file. parse them, and report any ruby syntax errors.
     # if not merge then inside Meggy::Config object.
     def configure_meggy
@@ -418,7 +418,7 @@ class Meggy
       apply_computed_config
     end
     
-    # reads all the config from the .meggy/pug.rb and stores it inside Meggy::Config
+    # reads all the config from the .megam/pug.rb and stores it inside Meggy::Config
     def read_config_file(file)
       Meggy::Config.from_file(file)
     rescue SyntaxError => e
@@ -444,11 +444,11 @@ class Meggy
 
 
 
-      #ERROR: You have invalid ruby syntax in your config file /home/ram/.meggy/pug.rb
-      #/home/ram/.meggy/pug.rb:9: syntax error, unexpected '='
+      #ERROR: You have invalid ruby syntax in your config file /home/ram/.megam/pug.rb
+      #/home/ram/.megam/pug.rb:9: syntax error, unexpected '='
       #pug[:username] > = "admin"
       #                  ^
-      # # /home/ram/.meggy/pug.rb
+      # # /home/ram/.megam/pug.rb
       #  8: meggy_server_url          'http://localhost:6167'
       #  9: pug[:username] > = "admin"
       # 10: pug[:password] = "team4dog"

@@ -4,19 +4,18 @@ class Meggy
   class Pug
     class AccountShow < Pug
 
-      banner "pug account show EMAIL (options)"
+      banner "pug account show"
       def run
-        @email = @name_args[0]        
-       if @email.nil?         
-          text.fatal("You must specify an email")
+       if Meggy::Config[:email].nil?         
+          text.fatal("You must specify an email in config file")
           show_usage
           exit 1        
        else
             text.info("Start Account Show")
             begin
-                Megam::Config[:email] = @email
+                Megam::Config[:email] = Meggy::Config[:email]
                 Megam::Config[:api_key] = Meggy::Config[:apikey]
-                @excon_res = Megam::Account.show(@email)   
+                @excon_res = Megam::Account.show(Meggy::Config[:email])   
                 ress = @excon_res.data[:body]
                 text.info(ress)
             #rescue other errors like connection refused by megam_play     

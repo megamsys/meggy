@@ -16,13 +16,9 @@ class Meggy
       
       banner "pug account create EMAIL (options)"
  
- def isEmail(str)
-  return str.match(/[a-zA-Z0-9._%]@(?:[a-zA-Z0-9]\.)[a-zA-Z]{2,4}/)
-end
-
       def run
         @email = @name_args[0]        
-       if @email.nil? && isEmail(@email).nil?         
+       if @email.nil?         
           text.fatal("You must specify an email")
           show_usage
           exit 1        

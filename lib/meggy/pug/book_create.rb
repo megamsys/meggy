@@ -55,13 +55,13 @@ class Meggy
     :short => "-e EMAIL",
     :long => "--email EMAIL",
     :description => "User's Email for which the book is created. [eg: a@b.com]. Default value will be get from conf file.",
-    :default => "config[:email]"
+    :default => Meggy::Config[:email]
 
       option :apikey,
     :short => "-k APIKEY",
     :long => "--apikey APIKEY",
     :description => "Apikey of the given email. [eg: oWEbCrBll4TRCR6MXrdMiw==]",
-    :default => "config[:apikey]"
+    :default => Meggy::Config[:apikey]
 
       banner "pug book create BOOKNAME [options]"
       def run
@@ -72,7 +72,6 @@ class Meggy
         if @book_name.nil?
           text.fatal("You must specify a Book Name")
           show_usage
-<<<<<<< HEAD
           exit 1        
        else
             
