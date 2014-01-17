@@ -34,8 +34,8 @@ class Meggy
           text.info(<<-MOAR_HELP)
   pug SUBCOMMAND --help     show the options for a command
 MOAR_HELP
-    Meggy::Pug.list_commands 
-         exit 1
+          Meggy::Pug.list_commands
+          exit 1
         else
           @query = name_args.join('-')
         end

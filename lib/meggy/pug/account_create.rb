@@ -1,4 +1,5 @@
 require "securerandom"
+require 'megam/core/server_api'
 require 'megam/core/account'
 require 'megam/core/config'
 require 'megam/core/error'

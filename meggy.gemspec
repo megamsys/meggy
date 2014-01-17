@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary = %q{CLI to manage apps on megam (https://www.megam.co).}
   gem.description = %q{Command-line tool to deploy apps and manage apps Megam(https://www.megam.co).}
   gem.post_install_message = <<-MESSAGE
-! You are free to invoke `pug` now. Read docs: http://docs.megam.co for more info.
+! You are free to invoke `pug` now. Read docs: http://www.gomegam.com/docs for more info.
 ! Support: http://support.megam.co
 MESSAGE
   gem.files         = `git ls-files`.split("\n")

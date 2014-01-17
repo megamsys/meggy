@@ -1,3 +1,4 @@
+require 'megam/core/server_api'
 require 'meggy/pug'
 
 class Meggy

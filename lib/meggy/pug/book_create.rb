@@ -1,3 +1,4 @@
+require 'megam/core/server_api'
 require 'megam/core/node'
 require 'megam/core/config'
 require 'megam/core/error'
@@ -83,12 +84,12 @@ class Meggy
                 @predef=excon_predef.data[:body].lookup(config[:appname])
                 data={:book_name => @book_name, :book_type => config[:type] , :predef_cloud_name => config[:crosscloud], :provider => @predef.provider, :provider_role => @predef.provider_role, :domain_name => '.'+config[:domain], :no_of_instances => config[:noofinstances].to_i, :predef_name => config[:appname], :deps_scm => config[:scm], :deps_war => "#{config[:war]}", :timetokill => "#{Time.now}", :metered => "", :logging => "", :runtime_exec => @predef.runtime_exec}
    
-    		node_hash=Megam::MakeNode.create(data, "server", "create")
+    		        node_hash=Megam::MakeNode.create(data, "server", "create")
     		
                 @excon_res = Megam::Node.create(node_hash) 
-@excon_res.data[:body].each do |res|
+                @excon_res.data[:body].each do |res|
                 text.info(res.some_msg[:msg])
-                end
+            end
         
             #rescue other errors like connection refused by megam_play     
             rescue Megam::API::Errors::ErrorWithResponse => ewr  
@@ -97,8 +98,8 @@ class Meggy
                  text.msg("#{text.color("Retry Again", :white, :bold)}")
                  text.info(res[:links])
              rescue ArgumentError => ae
-                  text.error(ae)
-                 text.msg("#{text.color("Retry Again", :white, :bold)}")
+                text.error(ae)
+                text.msg("#{text.color("Retry Again", :white, :bold)}")
            end
         end       
       end
