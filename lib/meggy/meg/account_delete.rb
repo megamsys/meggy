@@ -1,11 +1,11 @@
-require 'meggy/pug'
+require 'meggy/meg'
 require 'megam/core/server_api'
 
 class Meggy
-  class Pug
-    class AccountDelete < Pug
+  class Meg
+    class AccountDelete < Meg
 
-      banner "pug account delete (options)"
+      banner "meg account delete (options)"
       def run
         if name_args.length < 1
           show_usage
@@ -24,4 +24,3 @@ class Meggy
     end
   end
 end
-

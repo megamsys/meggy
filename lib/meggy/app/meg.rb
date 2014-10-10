@@ -13,19 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 require 'megam/core/log'
-require 'meggy/pug'
+require 'meggy/meg'
 require 'meggy/app'
 require 'mixlib/log'
 
-#Pug : The maa CLI interface which is used for cloud instrumenting cloud infrastructure provisioned by
+#Megm : The CLI interface which is used for cloud instrumenting cloud infrastructure provisioned by
 #CHEF.
 #
-class Meggy::App::Pug < Meggy::App
+class Meggy::App::Meg < Meggy::App
 
-  NO_COMMAND_GIVEN = "You need to pass a sub-command (e.g., pug SUB-COMMAND)\n"
+  NO_COMMAND_GIVEN = "You need to pass a sub-command (e.g., meg SUB-COMMAND)\n"
 
-  banner "Usage: pug sub-command (options)"
-  
+  banner "Usage: meg sub-command (options)"
+
   #We need to debate why and where will each of these common options be used.
   option :config_file,
     :short => "-c CONFIG",
@@ -62,17 +62,17 @@ class Meggy::App::Pug < Meggy::App
     :boolean      => true,
     :proc         => lambda {|v| puts "Meggy: #{::Meggy::VERSION}"},
     :exit         => 0
-  # Run the "pug app". Let it roam and stay by our side.[Go pug, come back for us].
+  # Run the "meg app". Let it roam and stay by our side.[Go meg, come back for us].
   # The first thing run does is it parses the options. Once the first level of parsing is done,
-  # ie the help, no_command, sub_command entry is verified it proceeds to call 
-  # Meggy_Pug with the user entered options and arguments (ARGV)
+  # ie the help, no_command, sub_command entry is verified it proceeds to call
+  # Meggy_Meg with the user entered options and arguments (ARGV)
   def run
     Mixlib::Log::Formatter.show_time = false
     validate_and_parse_options
     quiet_traps
-    # As you see here the run method is a self method (static), hence the initialize in 
-    #Meggy_Pug doesn't get called yet during the below invocation.
-    Meggy::Pug.run(ARGV, options) 
+    # As you see here the run method is a self method (static), hence the initialize in
+    #Meggy_Meg doesn't get called yet during the below invocation.
+    Meggy::Meg.run(ARGV, options)
     exit 0
   end
 
@@ -91,7 +91,7 @@ class Meggy::App::Pug < Meggy::App
     end
   end
 
-  # A check is performed to see of the command is entered, if a sub command exists, # 
+  # A check is performed to see of the command is entered, if a sub command exists, #
   # a version request or a help request.
   def validate_and_parse_options
     # Checking ARGV validity *before* parse_options because parse_options
@@ -122,7 +122,7 @@ class Meggy::App::Pug < Meggy::App
   def want_version?
     ARGV[0] =~ /^(--version|-v)$/
   end
-  
+
   # Print the help message with the exit code.  If no command is given, then a fatal message is printed.
   # The options are parsed by calling the parse_options present in the mixlib cli as extended by the super class app.
   # A error gets caught and results in an ugly stack trace, which probably needs to be shown in an elegant way.
@@ -138,7 +138,7 @@ class Meggy::App::Pug < Meggy::App
       puts "#{e}\n"
     end
     puts self.opt_parser
-    Meggy::Pug.list_commands 
+    Meggy::Meg.list_commands
     exit exitcode
   end
 

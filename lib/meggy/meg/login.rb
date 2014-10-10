@@ -1,9 +1,9 @@
-require 'meggy/pug'
+require 'meggy/meg'
 
 #require 'meggy/core/text'
 class Meggy
-  class Pug
-    class  Login < Meggy::Pug
+  class Meg
+    class  Login < Meggy::Meg
 
       option :username,
     :short => "-u",
@@ -15,7 +15,7 @@ class Meggy
     :long => "--password",
     :description => "Enter Password"
 
-      banner "pug login (options)"
+      banner "meg login (options)"
       def run
         unless name_args.empty?
           show_usage
@@ -31,4 +31,3 @@ class Meggy
     end
   end
 end
-

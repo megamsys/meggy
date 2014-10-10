@@ -1,12 +1,12 @@
-require 'meggy/pug'
-require 'meggy/pug/account_create'
+require 'meggy/meg'
+require 'meggy/meg/account_create'
 require 'meggy/config'
 require 'yaml'
 
 describe "Account:Create" do
 
   it "Account create command Success" do
-	  @id = Meggy::Pug::AccountCreate.new
+	  @id = Meggy::Meg::AccountCreate.new
 	@id.name_args = ["test@meggy.com"]
 	@id.run
 	puts "SUCCESS"
@@ -14,7 +14,7 @@ describe "Account:Create" do
 
 
   it "Account:Create" do
-	  @id = Meggy::Pug::AccountCreate.new
+	  @id = Meggy::Meg::AccountCreate.new
 	@id.name_args = ""
 	@id.text.should_receive(:fatal).with("You must specify an account name")
 	@id.run.should raise_error()

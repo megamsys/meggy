@@ -15,7 +15,7 @@
 
 require 'pp'
 
-#this is important to have meggy/config, or else 
+#this is important to have meggy/config, or else
 #ruby tries to load the deprecated Config class from ruby lib.
 require 'meggy/config'
 require 'meggy/core/exceptions'
@@ -28,16 +28,16 @@ class Meggy::App
   include Mixlib::CLI
   def initialize
     super # The super calls the mixlib cli.
-    
+
     #We'll probably have a JSONclient to formulate a json, and send it out.
     #Let it for now.
     @meggy_client_json = nil
-    
+
     ##Traps are being set for the following when an application starts.
     ##SIGHUP        1       Term    Hangup detected on controlling terminal
     ##                             or death of controlling process
     ##SIGINT        2       Term    Interrupt from keyboard
-    ##SIGQUIT       3       Core    Quit from keyboard    
+    ##SIGQUIT       3       Core    Quit from keyboard
     trap("TERM") do
       Meggy::App.fatal!("SIGTERM received, stopping", 1)
     end
@@ -65,11 +65,11 @@ class Meggy::App
       message = "#{e.class}: #{e}\n#{e.backtrace.join("\n")}"
       meggy_stacktrace_out = "Generated at #{Time.now.to_s}\n"
       meggy_stacktrace_out += message
-      
-      #after the message is formulated in the variable meggy_stack_trace_out, its 
+
+      #after the message is formulated in the variable meggy_stack_trace_out, its
       #stored in a file named meggy-stacktrace.out
       Meggy::FileCache.store("meggy-stacktrace.out", meggy_stacktrace_out)
-      
+
       ##The same error is logged in the log file saying, go look at meggy-stacktrace.out for error.
       Meggy::Log.fatal("Stacktrace dumped to #{Meggy::FileCache.load("meggy-stacktrace.out", false)}")
       Meggy::Log.debug(message)
