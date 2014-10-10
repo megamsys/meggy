@@ -56,9 +56,9 @@ class Meggy
     run_command_stderr_timeout 120
     run_command_stdout_timeout 120
 
-    
-    # Arbitrary pug configuration data
-    pug Hash.new
+
+    # Arbitrary meg configuration data
+    meg Hash.new
 
   end
 end

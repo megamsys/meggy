@@ -1,14 +1,11 @@
 # Meggy
 
-Meggy is a mini tooset used to bring instrumentation to your compute cloud (ec2).
-`Credit` goes to `github.com/opscode/chef` for providing code to build CLI's faster. 
+Meggy is a CLI tooset used to bring instrumentation to your compute cloud. The  userinterface version is https://www.megam.co
 
-This uses mixlib-cli, mixlib-config, mixlib-log, mixlib-auth and the same approach on how 
-the subcommands/config are used.
 
 ### Requirements
 
-Ruby 1.9.3+ 
+Ruby 2.0.0+
 
 
 #### Runtime Rubygem Dependencies
@@ -22,34 +19,35 @@ be installed with a simple `gem install bundler`. Afterwords, do the following:
 
 You can use this gem by putting the following inside your Gemfile:
 
-    gem "meggy", "0.1" *coming soon.
+    gem "meggy", "0.1"
 
 Once you clone this repository, you can run from the bin directory
 
 ```bash
 cd ~/meggy/bin/
-./pug
+./meg
 ```
 
 ### Commands
 
 ```ruby
-	pug	login
-	
-	pug identity create
-	
-	pug identity delete
-	
-	pug identity list
-	
-	pug login
+	meg	login
+
+	meg account create
+
+	meg account delete
+
+	meg account list
+
+	meg csar create
+
+  meg csar list
 
 ```
 
 # License
 
-Meggy - A toolset to be used by megam systems for instrumenting compute cloud.
-This is used in conjuction with Chef (chef.megam.co)
+Meggy - CLI for Megam.
 
 |                      |                                          |
 |:---------------------|:-----------------------------------------|

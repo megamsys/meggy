@@ -1,5 +1,5 @@
-require 'meggy/pug'
-require 'meggy/pug/account_create'
+require 'meggy/meg'
+require 'meggy/meg/account_create'
 require 'meggy/config'
 require 'yaml'
 
@@ -29,7 +29,7 @@ rescue Exception => e
 
 def locate_config_file
   if ENV['HOME']
-    user_config_file =  File.expand_path(File.join(ENV['HOME'], '.meggy', 'pug.rb'))
+    user_config_file =  File.expand_path(File.join(ENV['HOME'], '.meggy', 'meg.rb'))
   end
   puts "Config File"
   puts user_config_file
@@ -39,9 +39,9 @@ def locate_config_file
 end
 
 describe "RSPEC for config" do
-  @id = Meggy::Pug::AccountCreate.new
-  @test = Meggy::Pug.find_subcommands_via_dirglob
-  @test1 = Meggy::Pug.new
+  @id = Meggy::Meg::AccountCreate.new
+  @test = Meggy::Meg.find_subcommands_via_dirglob
+  @test1 = Meggy::Meg.new
   @test.each do |data|
     puts data
   end

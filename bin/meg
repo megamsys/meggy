@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# ./nm - nm CLI interface to maa
+# ./meg - meg CLI interface to megam
 #
 # License:: Apache License, Version 2.0
 #
@@ -24,9 +24,7 @@ bin_file = Pathname.new(__FILE__).realpath
 #puts "#{bin_file}"
 # add self to libpath
 $:.unshift File.expand_path("../../lib", bin_file)
-require 'meggy/app/pug'
+require 'meggy/app/meg'
 
-# Run our pug dog dude.!
-Meggy::App::Pug.new.run
-
-
+# Run our meg cloud dude.!
+Meggy::App::Meg.new.run

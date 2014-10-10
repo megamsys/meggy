@@ -6,13 +6,13 @@ Gem::Specification.new do |gem|
   gem.version = Meggy::VERSION
   gem.authors     = ["Kishorekumar Neelamegam","Thomas Alrin","Rajthilak"]
   gem.email = ["nkishore@megam.co.in", "alrin@megam.co.in", "rajthilak@megam.co.in"]
-  gem.homepage = "https://github.com/indykish/meggy"
+  gem.homepage = "https://github.com/megamsys/meggy"
   gem.license = "Apache V2"
   gem.extra_rdoc_files = ["README.md", "LICENSE" ]
-  gem.summary = %q{CLI to manage apps on megam (https://www.megam.co).}
-  gem.description = %q{Command-line tool to deploy apps and manage apps Megam(https://www.megam.co).}
+  gem.summary = %q{CLI to manage megam (http://www.gomegam.com).}
+  gem.description = %q{Command-line tool to deploy  and manage Megam(http://www.gomegam.com).}
   gem.post_install_message = <<-MESSAGE
-! You are free to invoke `pug` now. Read docs: http://www.gomegam.com/docs for more info.
+! You are free to invoke `meg` now. Read docs: http://www.gomegam.com/docs for more info.
 ! Support: http://support.megam.co
 MESSAGE
   gem.files         = `git ls-files`.split("\n")
@@ -23,8 +23,7 @@ MESSAGE
   gem.add_runtime_dependency 'mixlib-cli'
   gem.add_runtime_dependency 'mixlib-config'
   gem.add_runtime_dependency 'mixlib-log'
-  gem.add_runtime_dependency 'launchy'
-  gem.add_development_dependency 'rspec'
   gem.add_runtime_dependency 'rubyzip'
   gem.add_runtime_dependency 'randexp'
+  gem.add_development_dependency 'rspec'
 end
