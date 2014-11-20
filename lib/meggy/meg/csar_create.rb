@@ -1,9 +1,9 @@
 require 'megam/core/server_api'
-require 'megam/core/node'
 require 'megam/core/config'
 require 'megam/core/error'
 require "megam/core/text"
 require 'megam/api'
+require 'meggy/meg'
 
 class Meggy
   class Meg
@@ -19,7 +19,7 @@ class Meggy
 
      option :csarfile,
     :short => "-f TOSCA Yaml file",
-    :long => "--file",
+    :long => "--file TOSCA Yaml file",
     :description => "CSAR TOSCA Yaml file.",
     :default => 1
 
