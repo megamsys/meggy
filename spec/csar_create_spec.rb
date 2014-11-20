@@ -1,5 +1,4 @@
 require 'meggy/meg'
-require 'meggy/meg/book_create'
 require 'meggy/config'
 require 'yaml'
 

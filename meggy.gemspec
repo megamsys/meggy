@@ -25,5 +25,6 @@ MESSAGE
   gem.add_runtime_dependency 'mixlib-log'
   gem.add_runtime_dependency 'rubyzip'
   gem.add_runtime_dependency 'randexp'
+  gem.add_runtime_dependency 'command_line_reporter'
   gem.add_development_dependency 'rspec'
 end
