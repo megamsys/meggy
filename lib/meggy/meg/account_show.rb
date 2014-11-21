@@ -46,7 +46,6 @@ class Meggy
             column acct_res.created_at
           end
         end
-
       end
 
     end
