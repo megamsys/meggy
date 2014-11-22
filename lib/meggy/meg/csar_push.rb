@@ -46,16 +46,16 @@ class Meggy
         begin
             Megam::Config[:email] = Meggy::Config[:email]
             Megam::Config[:api_key] = Meggy::Config[:api_key]                                           
-            @excon_res = Megam::CSAR.push({"csar_id" => csar_id})
+            @excon_res = Megam::CSAR.push(csar_id)
             report(@excon_res.data[:body])
             rescue Megam::API::Errors::ErrorWithResponse => ewr
                  res = ewr.response.data[:body].some_msg
                  text.error(res[:msg])
-                 text.msg("#{text.color("Retry Again", :white, :bold)}")
+                 text.msg("#{text.color("Retry Again 1", :white, :bold)}")
                  text.info(res[:links])
              rescue ArgumentError => ae
                 text.error(ae)
-                text.msg("#{text.color("Retry Again", :white, :bold)}")
+                text.msg("#{text.color("Retry Again 2", :white, :bold)}")
         end
       end
       
