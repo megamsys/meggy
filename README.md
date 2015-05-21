@@ -1,4 +1,7 @@
-# Meggy
+# This is getting sunset as a new cli based on [rust](rust-lang.org) is under progress. 
+[meg](https://github.com/megamsys/meg.git)
+
+## Meggy
 
 Meggy is a CLI tooset used to bring instrumentation to your compute cloud. The  userinterface version is https://www.megam.co
 
