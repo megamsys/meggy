@@ -1,5 +1,4 @@
-# This is getting sunset as a new cli based on [rust](rust-lang.org) is under progress. 
-[meg](https://github.com/megamsys/meg.git)
+# This is getting sunset as a new cli  [meg](https://github.com/megamsys/meg.git) based on [rust](rust-lang.org) is getting released on May 28, 2014.
 
 ## Meggy
 
